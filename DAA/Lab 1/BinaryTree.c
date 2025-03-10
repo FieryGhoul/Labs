@@ -1,44 +1,61 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
+
+int opcount = 0;
+
+void swap(int *a, int *b) {
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void heapify(int arr[], int n, int i, int *opcount) {
+    int largest = i;
+    int left = 2 * i + 1;
+    int right = 2 * i + 2;
+
+    if (left < n && arr[left] > arr[largest]) {
+        largest = left;
+        (*opcount)++;
+    }
+
+    if (right < n && arr[right] > arr[largest]) {
+        largest = right;
+        (*opcount)++;
+    }
+
+    if (largest != i) {
+        swap(&arr[i], &arr[largest]);
+        (*opcount)++;
+        heapify(arr, n, largest, opcount);
+    }
+}
+
+void buildHeap(int arr[], int n, int *opcount) {
+    for (int i = n / 2 - 1; i >= 0; i--) {
+        heapify(arr, n, i, opcount);
+    }
+}
 
 int main() {
-    int n, i, j;
-
-    printf("Enter the number of vertices: ");
+    int n;
+    printf("Enter size of array: ");
     scanf("%d", &n);
+    int arr[n];
 
-    int **adjMatrix = (int **)malloc(n * sizeof(int *));
-    for(i = 0; i < n; i++) {
-        adjMatrix[i] = (int *)malloc(n * sizeof(int));
-    }
-    printf("Enter the adjacency matrix:\n");
-    for(i = 0; i < n; i++) {
-        for(j = 0; j < n; j++) {
-            scanf("%d", &adjMatrix[i][j]);
-        }
+    printf("Enter the elements: ");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
     }
 
-    printf("\nAdjacency Matrix:\n");
-    for(i = 0; i < n; i++) {
-        for(j = 0; j < n; j++) {
-            printf("%d ", adjMatrix[i][j]);
-        }
-        printf("\n");
-    }
+    buildHeap(arr, n, &opcount);
 
-    printf("\nAdjacency List:\n");
-    for(i = 0; i < n; i++) {
-        printf("Vertex %d: ", i);
-        for(j = 0; j < n; j++) {
-            if(adjMatrix[i][j] == 1) {
-                printf("%d ", j);
-            }
-        }
-        printf("\n");
+    printf("Heapified array: ");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
     }
+    printf("\n");
 
-    for(i = 0;i<n;i++){
-    	free(adjMatrix[i]);
-    }
-    free(adjMatrix);
+    printf("Operation count: %d\n", opcount);
+    return 0;
 }
