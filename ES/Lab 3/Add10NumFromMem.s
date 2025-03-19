@@ -1,0 +1,31 @@
+	AREA	RESET, DATA, READONLY
+	EXPORT __Vectors
+__Vectors
+	DCD 0x10001000
+	DCD Reset_Handler
+	ALIGN
+	AREA	mycode, CODE, READONLY
+	ENTRY
+	EXPORT Reset_Handler
+Reset_Handler
+	MOV R0, #0
+	LDR R1, =NUM
+	MOV R2, #10
+LOOP
+	LDR R3, [R1], #4
+	ADD R0, R0, R3
+	SUB R2, R2, #1
+	; Exit the loop when R2 reaches 0
+	CMP R2, #0
+	BEQ END_LOOP
+	BNE LOOP
+END_LOOP
+	LDR R4, =RESULT
+	STR R0, [R4]
+	B STOP
+STOP
+	B STOP
+NUM     DCD 10, 20, 30, 40, 50, 60, 70, 80, 90, 100
+RESULT  DCD 0
+
+END
