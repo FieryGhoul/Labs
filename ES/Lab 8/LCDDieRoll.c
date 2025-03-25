@@ -41,8 +41,8 @@ void delay_lcd(int r1){
 
 void clear_ports(void){	
 	LPC_GPIO0->FIOCLR = 0x0F<<23;	//data line clear
-	LPC_GPIO0->FIOCLR = 1<<27;		//RS line clear
-	LPC_GPIO0->FIOCLR = 1<<28;		//enable line clear
+	LPC_GPIO0->FIOCLR = 1<<27;	//RS line clear
+	LPC_GPIO0->FIOCLR = 1<<28;	//enable line clear
 	
 	return;
 }
@@ -54,7 +54,7 @@ void lcd_puts(char* string){
 		temp3=string[i];
 		lcd_comdata(temp3,1);
 		i++;
-		if(i==16)	lcd_comdata(0xc0,0);
+		if(i==16) lcd_comdata(0xc0,0);
 	}
 	return;
 }
