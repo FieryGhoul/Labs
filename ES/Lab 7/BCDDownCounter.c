@@ -36,6 +36,6 @@ void displaySSD (int num) {
 		LPC_GPIO0->FIOCLR = (0xFF << 4);
 		LPC_GPIO0->FIOSET = digits[d[3-i]] << 4;
 		
-		for(j=0;j<10000;j++);
+		for(j=0;j<1000;j++);
 	}
 }
