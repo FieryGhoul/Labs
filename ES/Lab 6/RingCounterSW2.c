@@ -13,13 +13,13 @@ int main(void){
   while(1){
     if((LPC_GPIO1->FIOPIN & (1<<12)) == 0){        //checking if sw2 is clicked
       LPC_GPIO0->FIOCLR=LED;                       //clear current led ports
-      for(j=0;j<100000;j++);
+      for(j=0;j<10000;j++);
       LED<<=1;                                     //shift left
       if(LED==(0x10<<8)){                          //if p0.11 is lit goes back to pin p0.4                    
         LED=0x10;
       }
     }
     LPC_GPIO0->FIOSET=LED;                          //Set LED value on
-    for(j=0;j<100000;j++);                          //delay
+    for(j=0;j<10000;j++);                          //delay
   }
 }
