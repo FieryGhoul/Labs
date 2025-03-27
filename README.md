@@ -11,10 +11,10 @@
 
 - Introduction to SQL, Intermediate SQL, Integrity Constraints in SQL, Additional Exercises on SQL, PL/SQL Basics, Exception Handling and Cursors, Additional Cursors constructs and Transactions, Procedures, Functions and Packages, Triggers, Mini Project. 
 
-- These programs were executed on Oracle Database in SQL. (Orcale 11G XE)
+- These programs were executed on Oracle Database in SQL. (Orcale 12e)
 
 **CSE 2263: Embedded Systems Lab**
 
-- Basics of assembly language programming, data transfer, arithmetic operations, logical instructions, branch instructions, code conversion, packing and unpacking, sorting, searching, recursion, I/O interfacing of LEDs, LCD, keyboard, 7 segment display, stepper motor, DAC and ADC, PWM.
+- Basics of assembly language programming, data transfer, arithmetic operations, logical instructions, branch instructions, code conversion, packing and unpacking, sorting, searching, recursion, I/O interfacing of LEDs, LCD, keyboard, 7 segment display, DAC, Stepper Motor)
 
 - These programs are executed in ARM Assembly Language and Embedded 'C' using Keil microVision4, NXP, LPC1768.
