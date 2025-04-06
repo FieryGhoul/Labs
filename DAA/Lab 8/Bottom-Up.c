@@ -1,61 +1,61 @@
-#include<stdio.h>
-#include<stdlib.h>
+#include <stdio.h>
 
-int opcount = 0;
-
+// Function to swap two elements
 void swap(int *a, int *b) {
     int temp = *a;
     *a = *b;
     *b = temp;
 }
 
-void heapify(int arr[], int n, int i, int *opcount) {
-    int largest = i;
-    int left = 2 * i + 1;
-    int right = 2 * i + 2;
+// Function for top-down heapify
+void topDownHeapify(int arr[], int n, int i) {
+    int largest = i; // Initialize largest as root
+    int left = 2 * i + 1; // Left child index
+    int right = 2 * i + 2; // Right child index
 
-    if (left < n && arr[left] > arr[largest]) {
+    // Check if left child exists and is greater than root
+    if (left < n && arr[left] > arr[largest])
         largest = left;
-        (*opcount)++;
-    }
 
-    if (right < n && arr[right] > arr[largest]) {
+    // Check if right child exists and is greater than the largest so far
+    if (right < n && arr[right] > arr[largest])
         largest = right;
-        (*opcount)++;
-    }
 
+    // If the largest is not the root, swap and recursively heapify the affected subtree
     if (largest != i) {
         swap(&arr[i], &arr[largest]);
-        (*opcount)++;
-        heapify(arr, n, largest, opcount);
+        topDownHeapify(arr, n, largest);
     }
 }
 
-void buildHeap(int arr[], int n, int *opcount) {
-    for (int i = n / 2 - 1; i >= 0; i--) {
-        heapify(arr, n, i, opcount);
+// Function to build a max-heap using a top-down approach
+void buildMaxHeap(int arr[], int n) {
+    // Start heapifying from the last non-leaf node up to the root node
+    for (int i = (n / 2) - 1; i >= 0; i--) {
+        topDownHeapify(arr, n, i);
     }
 }
 
-int main() {
-    int n;
-    printf("Enter size of array: ");
-    scanf("%d", &n);
-    int arr[n];
-
-    printf("Enter the elements: ");
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &arr[i]);
-    }
-
-    buildHeap(arr, n, &opcount);
-
-    printf("Heapified array: ");
+// Function to print an array
+void printArray(int arr[], int n) {
     for (int i = 0; i < n; i++) {
         printf("%d ", arr[i]);
     }
     printf("\n");
+}
 
-    printf("Operation count: %d\n", opcount);
+// Driver code
+int main() {
+    int arr[] = {4, 18, 17, 10, 19, 20, 14, 8, 3, 12};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Original Array:\n");
+    printArray(arr, n);
+
+    buildMaxHeap(arr, n);
+
+    printf("Max-Heap Array:\n");
+    printArray(arr, n);
+
     return 0;
 }
