@@ -78,15 +78,15 @@ Node *insert(Node *node, int data) {
         return rightRotate(node);
     }
 
-    // rr
-    if (balance < -1 && data > node->right->data) {
-        return leftRotate(node);
-    }
-
-    // lr
+      // lr
     if (balance > 1 && data > node->left->data) {
         node->left = leftRotate(node->left);
         return rightRotate(node);
+    }
+
+    // rr
+    if (balance < -1 && data > node->right->data) {
+        return leftRotate(node);
     }
 
     // rl
