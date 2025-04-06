@@ -7,32 +7,42 @@ void swap(int *a, int *b) {
     *b = temp;
 }
 
-// Function for top-down heapify
-void topDownHeapify(int arr[], int n, int i) {
-    int largest = i; // Initialize largest as root
-    int left = 2 * i + 1; // Left child index
-    int right = 2 * i + 2; // Right child index
+// Function for bottom-up heapify
+void bottomUpHeapify(int arr[], int n, int i) {
+    int parent = i; // Start at the current node
+    int leftChild = 2 * parent + 1; // Left child index
+    int rightChild = 2 * parent + 2; // Right child index
 
-    // Check if left child exists and is greater than root
-    if (left < n && arr[left] > arr[largest])
-        largest = left;
+    while (leftChild < n) {
+        int largest = parent;
 
-    // Check if right child exists and is greater than the largest so far
-    if (right < n && arr[right] > arr[largest])
-        largest = right;
+        // Check if left child exists and is greater than parent
+        if (arr[leftChild] > arr[largest])
+            largest = leftChild;
 
-    // If the largest is not the root, swap and recursively heapify the affected subtree
-    if (largest != i) {
-        swap(&arr[i], &arr[largest]);
-        topDownHeapify(arr, n, largest);
+        // Check if right child exists and is greater than the largest so far
+        if (rightChild < n && arr[rightChild] > arr[largest])
+            largest = rightChild;
+
+        // If parent is already larger than its children, break out of the loop
+        if (largest == parent)
+            break;
+
+        // Swap parent with the larger child
+        swap(&arr[parent], &arr[largest]);
+
+        // Move down to the next level
+        parent = largest;
+        leftChild = 2 * parent + 1;
+        rightChild = 2 * parent + 2;
     }
 }
 
-// Function to build a max-heap using a top-down approach
-void buildMaxHeap(int arr[], int n) {
+// Function to build a max-heap using a bottom-up approach
+void buildMaxHeapBottomUp(int arr[], int n) {
     // Start heapifying from the last non-leaf node up to the root node
     for (int i = (n / 2) - 1; i >= 0; i--) {
-        topDownHeapify(arr, n, i);
+        bottomUpHeapify(arr, n, i);
     }
 }
 
@@ -52,7 +62,7 @@ int main() {
     printf("Original Array:\n");
     printArray(arr, n);
 
-    buildMaxHeap(arr, n);
+    buildMaxHeapBottomUp(arr, n);
 
     printf("Max-Heap Array:\n");
     printArray(arr, n);
