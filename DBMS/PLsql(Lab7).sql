@@ -148,24 +148,31 @@ end;
 
 
   
-declare 
-flag numeric(2,1); 
-temp numeric(1);
-rollvar student.rollno%TYPE;
-gr student.gpa%TYPE;
-	begin
-	for i in 1..5 loop
-	flag:=0;
-	temp:=0;
-	select gpa into gr from student where rollno=i;
-	if (flag<gr) then 
-	flag:=gr;
-	temp:=i;
-	end if;
-	end loop;
-dbms_output.put_line('Roll '||temp||' has max. GPA of '||flag);
-end;
+
+--6. Write a PL/SQL block to find the student with max. GPA without using aggregate function.
+DECLARE
+    max_gpa student.gpa%TYPE := 0;
+    max_rollno student.rollno%TYPE := NULL;
+    current_gpa student.gpa%TYPE;
+BEGIN
+    FOR sr IN (SELECT rollno FROM student) LOOP
+        BEGIN
+            SELECT gpa INTO current_gpa FROM student WHERE rollno = sr.rollno;
+            IF current_gpa > max_gpa THEN
+                max_gpa := current_gpa;
+                max_rollno := sr.rollno;
+            END IF;
+        EXCEPTION
+            WHEN NO_DATA_FOUND THEN
+                -- Handle the case where no data is found, if necessary
+                NULL;
+        END;
+    END LOOP;
+
+        DBMS_OUTPUT.PUT_LINE('Roll ' || max_rollno || ' has the maximum GPA of ' || max_gpa);
+END;
 /
+
 
 
 
