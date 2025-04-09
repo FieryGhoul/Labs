@@ -1,8 +1,10 @@
 
 create table salary_raise(Instructor_Id numeric(5), Raise_date date, Raise_amt numeric(8,2));
+
 INSERT INTO salary_raise VALUES (33456, TO_DATE('2005-07-07', 'YYYY-MM-DD'), 10000);
 
 set serveroutput on
+	
 declare 
 cursor c is (select * from instructor) for update;
 dname instructor.dept_name%TYPE;
@@ -38,7 +40,12 @@ end;
 
 set serveroutput on
 declare
-cursor c is select c.course_id, c.title, c.dept_name, c.credits, t.name, s.building, s.room_number, s.time_slot_id, count(*) tot_student_no from department d join course c on c.dept_name=d.dept_name join section s on c.course_id=s.course_id join instructor t on d.dept_name=t.dept_name group by c.course_id, c.title, c.dept_name, c.credits, t.name, s.building, s.room_number, s.time_slot_id;
+	cursor c is select c.course_id, c.title, c.dept_name, c.credits, t.name, s.building, s.room_number, s.time_slot_id, count(*) tot_student_no 
+	from department d 
+	join course c on c.dept_name=d.dept_name 	
+	join section s on c.course_id=s.course_id 
+	join instructor t on d.dept_name=t.dept_name 
+	group by c.course_id, c.title, c.dept_name, c.credits, t.name, s.building, s.room_number, s.time_slot_id;
 begin
 for i in c loop
 	dbms_output.put_line(i.course_id||' '||i.title||' '||i.dept_name||' '||i.credits||' '||i.name||' '||i.building||' '||i.room_number||' '||i.time_slot_id||' '||i.tot_student_no);
@@ -51,7 +58,10 @@ end;
   
 set serveroutput on
 declare
-cursor c is select c.id, c.name, c.dept_name, c.tot_cred from student c join takes t on t.id=c.id where t.course_id='CS101';
+	cursor c is select c.id, c.name, c.dept_name, c.tot_cred 
+	from student c 
+	join takes t on t.id=c.id 
+	where t.course_id='CS101';
 begin
 for i in c loop
 	dbms_output.put_line(i.id||' '||i.dept_name||' '||i.name||' '||i.tot_cred);
@@ -100,7 +110,9 @@ end;
   
 set serveroutput on
 declare 
-cursor c is select id, course_id from takes group by id,course_id;
+	cursor c is select id, course_id 
+	from takes 
+	group by id,course_id;
 begin
 for i in c loop
 	dbms_output.put_line(i.id||' '||i.course_id);
@@ -113,7 +125,10 @@ end;
   
 set serveroutput on
 declare
-cursor c is select s.id from takes s, advisor a, teaches i where s.course_id=i.course_id and s.id=a.s_iD and i.id=a.i_id;
+	cursor c is select s.id from takes s, advisor a, teaches i 
+	where s.course_id=i.course_id 
+	and s.id=a.s_iD 
+	and i.id=a.i_id;
 begin
 for i in c loop
 	dbms_output.put_line(i.id);
