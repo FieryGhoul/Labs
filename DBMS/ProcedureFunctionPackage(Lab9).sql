@@ -11,6 +11,8 @@ print;
 end;
 /
 
+--if using oracle live use AUTHID CURRENT_USER
+--create or replace procedure print AUTHID CURRENT_USER is
 
 
 
@@ -26,16 +28,17 @@ end;
   
 --q2
 set serveroutput on
-create or replace procedure list(p_dept_name varchar) is
+  
+create or replace procedure list(name varchar) is
 begin
 
-    for instructor_rec in (select name from instructor where dept_name = p_dept_name) loop
-        dbms_output.put_line(instructor_rec.name);
+    for i in (select name from instructor where dept_name = name) loop
+        dbms_output.put_line(i.name);
     end loop;
 
 
-    for course_rec in (select title from course where dept_name = p_dept_name) loop
-        dbms_output.put_line(course_rec.title);
+    for i in (select title from course where dept_name = name) loop
+        dbms_output.put_line(i.title);
     end loop;
 end;
 /
@@ -109,12 +112,12 @@ end;
 --q4 
 create or replace procedure list_students(p_dept_name varchar) is
 begin
-    for student_rec in (select name from student where p_dept_name = dept_name) loop
-        dbms_output.put_line(student_rec.name);
+    for i in (select name from student where p_dept_name = dept_name) loop
+        dbms_output.put_line(i.name);
     end loop;
 
-    for course_rec in (select title from course where p_dept_name = dept_name) loop
-        dbms_output.put_line(course_rec.title);
+    for i in (select title from course where p_dept_name = dept_name) loop
+        dbms_output.put_line(i.title);
     end loop;
 end;
 /
@@ -234,29 +237,33 @@ end uni_package;
 /
 
 create or replace package body uni_package as
-    procedure list_inst(d_dept_name varchar)as
+
+    procedure list_inst(d_dept_name varchar) is
     begin
-        for instructor_rec in (select name from instructor where dept_name = d_dept_name) loop
-            dbms_output.put_line(instructor_rec.name);
+        for i in (select name from instructor where dept_name = d_dept_name) loop
+            dbms_output.put_line(i.name);
         end loop;
     end list_inst;
 
-    function max_salary(dept_name varchar) return number as 
-        v_max_salary number;
+    function max_salary(d_dept_name varchar) return number is 
+        maxsal number;
     begin
-        select max(salary) into v_max_salary
+        select max(salary) into maxsal
         from instructor
-        where dept_name = dept_name;
-        return v_max_salary;
+        where dept_name = d_dept_name;
+        return maxsal;
     end max_salary;
+
 end uni_package;
 /
 
+-- Now you can test the package
 begin
     uni_package.list_inst('Comp. Sci.');
     dbms_output.put_line('Max salary in Computer Science: ' || uni_package.max_salary('Comp. Sci.'));
 end;
 /
+
 
 
 
