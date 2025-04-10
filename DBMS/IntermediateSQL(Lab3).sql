@@ -1,33 +1,63 @@
-select c.course_id from course c, section s where s.semester='Fall' and s.year=2009 and s.course_id=c.course_id union select c.course_id from course c, section s where s.semester='Spring' and s.year=2010 s.course_id=c.course_id
+--q1
+   select c.course_id 
+   from course c, section s 
+   where s.semester='Fall' and s.year=2009 and s.course_id=c.course_id 
+   union 
+   select c.course_id 
+   from course c, section s 
+   where s.semester='Spring' and s.year=2010 s.course_id=c.course_id
 
-select c.title from course c, section s where s.semester='Fall' and s.year=2009 and s.course_id=c.course_id intersect select c.title from course c, section s where s.semester='Spring' and s.year=2010 and s.course_id=c.course_id; 
+--q2
+   select c.course_id 
+   from course c, section s 
+   where s.semester='Fall' and s.year=2009 and s.course_id=c.course_id 
+   intersect 
+   select c.course_id 
+   from course c, section s 
+   where s.semester='Spring' and s.year=2010 s.course_id=c.course_id
 
+--q3      
 select c.title from course c, section s where s.semester='Fall' and s.year=2009 and s.course_id=c.course_id minus select c.title from course c, section s where s.semester='Spring' and s.year=2010 and s.course_id=c.course_id; 
-
+--q4
 select title from course minus select c.title from course c,takes t where t.course_id=c.course_id;
-
+--q5
 select distinct course_id from takes t where semester='Fall' and year=2009 and course_id in (select distinct course_id from takes t where semester='Spring' and year=2010);
-
+--q6
 select count(*) from takes where course_id in (select course_id from teaches where ID=10101);
-
-select distinct course_id from takes t where semester='Fall' and year=2009 and course_id not in (select distinct course_id from takes t where semester='Spring' and year=2010);
-
+--q7
+   select distinct course_id 
+   from takes t
+   where semester='Fall' and year=2009 
+   and course_id not in (select distinct course_id from takes t where semester='Spring' and year=2010);
+--q8
 select name from student where name in (select name from instructor);
-
+--q9
 select name from instructor where salary >= some (select salary from instructor where dept_name = 'Biology');
-
+--q10
 select name from instructor where salary > all (select salary  from instructor where dept_name='Biology');
 
-select dept_name, avg(salary) from instructor group by dept_name having avg(salary) = all(select max(avg(salary)) from instructor group by dept_name);
 
+--q11
+
+select dept_name, avg(salary) 
+from instructor 
+group by dept_name 
+having avg(salary) = all(select max(avg(salary))
+                         from instructor
+                         group by dept_name);
+
+--q12
 select dept_name from department where budget < all (select avg(salary) from instructor);
-
+--q13
 select c.title from course c, takes t where c.course_id=t.course_id and t.semester='Fall' and t.year=2009 and exists (select c.title from course c, takes t where c.course_id=t.course_id and t.semester='Spring' and t.year=2010);
-
+--q14
 select id from student where not exists((select course_id from course where dept_name='Biology') minus (select c.course_id from course c, takes t where c.course_id=t.course_id));
-
-select course_id from section where year = 2009 group by course_id having count(course_id) <= 1;
-
+--q15
+   select course_id 
+   from section where year = 2009 
+   group by course_id 
+   having count(course_id) <= 1;
+--q16
 
 
 select dept_name, avg(salary) from instructor group by dept_name having avg(salary) > 42000;
