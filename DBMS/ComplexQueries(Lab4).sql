@@ -1,29 +1,61 @@
-select course_id, count(id)from takes group by course_id;
+	select course_id, count(id)
+	from takes 
+	group by course_id;
 
 select dept_name, avg(count)
     from (
         select c.dept_name, count(t.id) as count
         from takes t
         join course c on t.course_id = c.course_id
-        group by c.dept_name, t.course_id) department count
-    group by dept_name having avg(count) > 10;
+        group by c.dept_name, t.course_id) 
+	department count
+    	group by dept_name
+	having avg(count) > 10;
 	
-select dept_name, count(course_id) from course group by dept_name;
+select dept_name, count(course_id) 
+	from course 
+	group by dept_name;
 
-select dept_name, avg(i.salary) from department d join instructor i on d.dept_name = i.dept_name group by d.dept_name having avg(i.salary) > 42000;
+select dept_name, avg(i.salary) 
+	from department d 
+	join instructor i on d.dept_name = i.dept_name 
+	group by d.dept_name 
+	having avg(i.salary) > 42000;
 
-select s.course_id, s.sec_id, count(distinct t.id) as enrollment from section s join takes t on s.course_id = t.course_id and s.sec_id = t.sec_id where s.semester = 'Spring' and s.year = 2009 group by s.course_id, s.sec_id;
+select s.course_id, s.sec_id, count(distinct t.id) as enrollment 
+	from section s 
+	join takes t on s.course_id = t.course_id
+	and s.sec_id = t.sec_id 
+	where s.semester = 'Spring'
+	and s.year = 2009 
+	group by s.course_id, s.sec_id;
 
-select c.course_id, p.prereq_id from prereq p join course c on p.course_id = c.course_id order by c.course_id asc;
+select c.course_id, p.prereq_id 
+	from prereq p 
+	join course c on p.course_id = c.course_id
+	order by c.course_id asc;
 
 select * from instructor order by i.salary desc;
 
-select dept_name, sum(salary) from instructor group by dept_name
-having sum(salary) = (select max(sum(salary)) from instructor group by dept_name); 	
+select dept_name, sum(salary) 
+	from instructor 
+	group by dept_name
+	having sum(salary) = (select max(sum(salary)) 
+				from instructor); 	
 
-select dept_name, avg(salary) as avg_salary from instructor group by dept_name having avg(salary) > 42000;
+select dept_name, avg(salary) as avg_salary 
+	from instructor 
+	group by dept_name 
+	having avg(salary) > 42000;
 
-select s.sec_id, count(t.id) as enrolment from section s join takes t on s.course_id = t.course_id and s.sec_id = t.sec_id and s.semester = 'Spring' and s.year = 2010 group by s.course_id, s.sec_id having count(t.id) = (select max(enrolment) from (select count(id) as enrolment from takes group by course_id, sec_id) enrolments);
+select s.sec_id, count(t.id) as enrolment 
+	from section s 
+	join takes t on s.course_id = t.course_id
+	and s.sec_id = t.sec_id 
+	and s.semester = 'Spring' 
+	and s.year = 2010 
+	group by s.course_id, s.sec_id 
+	having count(t.id) = (select max(enrolment) from (select count(id) as enrolment from takes group by course_id, sec_id) enrolments);
 
 select i.name
 from instructor i
