@@ -30,7 +30,7 @@ int main(void) {
     // Configure GPIO
     LPC_GPIO2->FIODIR |= 0x00003C00; // Rows P2.10 - P2.13 as output
     LPC_GPIO1->FIODIR &= 0xF87FFFFF; // Columns P1.23 - P1.26 as input
-    LPC_GPIO0->FIODIR |= (0x0F << 23) | (1 << 27) | (1 << 28); // LCD Control pins
+    // LPC_GPIO0->FIODIR |= (0x0F << 23) | (1 << 27) | (1 << 28); // LCD Control pins
 
     clear_ports();
     delay_lcd(3200);
