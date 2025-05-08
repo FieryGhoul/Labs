@@ -34,9 +34,12 @@ int main(void){
 }
 
 void delay_lcd(int r1){
-	unsigned int r;
-	for(r=0;r<r1;r++);
-	return;
+	LPC_TIM0->CTCR=0x00;
+	LPC_TIM0->TCR=0x02;
+	LPC_TIM0->PR=2999;
+	LPC_TIM0->TCR=0x01;
+	while(LPC_TIM->TC<delay);
+	LPC_TIM0->TCR=0x00;
 }
 
 void clear_ports(void){	
