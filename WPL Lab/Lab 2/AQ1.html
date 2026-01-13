@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Bill Generator</title>
+</head>
+<body>
+    <h2>Billing Page</h2>
+
+    Brand:
+    <select id="brand">
+        <option value="HP">HP</option>
+        <option value="Nokia">Nokia</option>
+        <option value="Samsung">Samsung</option>
+        <option value="Motorola">Motorola</option>
+        <option value="Apple">Apple</option>
+    </select>
+    <br><br>
+
+    Products:
+    <input type="checkbox" id="mobile" value="Mobile">Mobile
+    <input type="checkbox" id="laptop" value="Laptop">Laptop
+    <br><br>
+
+    Quantity: <input type="number" id="quantity" value="1" min="1">
+    <br><br>
+
+    <button onclick="produceBill()">Produce Bill</button>
+
+    <script>
+        const prices = {
+            HP: { Mobile: 500, Laptop: 1000 },
+            Nokia: { Mobile: 300, Laptop: 900 },
+            Samsung: { Mobile: 400, Laptop: 1100 },
+            Motorola: { Mobile: 350, Laptop: 950 },
+            Apple: { Mobile: 1000, Laptop: 2000 }
+        };
+
+        function produceBill() {
+            const brand = document.getElementById('brand').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const mobileChecked = document.getElementById('mobile').checked;
+            const laptopChecked = document.getElementById('laptop').checked;
+
+            if (!mobileChecked && !laptopChecked) {
+                alert("Select at least one product!");
+                return;
+            }
+
+            let total = 0;
+            if (mobileChecked) total += prices[brand].Mobile * quantity;
+            if (laptopChecked) total += prices[brand].Laptop * quantity;
+
+            alert("Total Amount: $" + total);
+        }
+    </script>
+</body>
+</html>

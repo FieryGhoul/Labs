@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bouncing Ball</title>
+    <style>
+        #ball {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 100px;
+        }
+        body {
+            height: 400px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div id="ball"></div>
+
+    <script>
+        const ball = document.getElementById('ball');
+
+        ball.animate([
+            { top: '0px' },
+            { top: '350px' },
+            { top: '0px' }
+        ], {
+            duration: 1000,  // 1 second
+            iterations: Infinity, // repeat forever
+            easing: 'ease-in-out'
+        });
+    </script>
+</body>
+</html>
