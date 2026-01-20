@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Train Ticket Booking</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body { background-color: #f4f7f6; }
+        .booking-card { border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .btn-booking { background-color: #007bff; color: white; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card booking-card">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3>🚆 RailConnect Booking</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>From Station</label>
+                                <input type="text" class="form-control" placeholder="Enter Departure City">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>To Station</label>
+                                <input type="text" class="form-control" placeholder="Enter Destination City">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Date of Journey</label>
+                                <input type="date" class="form-control">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Class</label>
+                                <select class="form-control">
+                                    <option>Sleeper (SL)</option>
+                                    <option>AC 3 Tier (3A)</option>
+                                    <option>AC 2 Tier (2A)</option>
+                                    <option>First AC (1A)</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Quota</label>
+                                <select class="form-control">
+                                    <option>General</option>
+                                    <option>Ladies</option>
+                                    <option>Tatkal</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-booking btn-block btn-lg mt-3">Search Trains</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
