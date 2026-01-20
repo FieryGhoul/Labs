@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Layout</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container mt-3">
+
+  <!-- Top Part -->
+  <div class="col text-center">
+    <h2>Dashboard <span class="badge badge-success">New</span></h2>
+    <input type="text" class="form-control" placeholder="Search">
+  </div>
+
+  <!-- Bottom Part -->
+  <div class="row align-items-end">
+
+    <div class="col-md-4">
+      <h5>Login</h5>
+      <input type="text" class="form-control" placeholder="Username"><br>
+      <button class="btn btn-primary btn-block">Login</button>
+    </div>
+
+    <div class="col-md-4">
+      <h5>Actions</h5>
+      <div class="btn-group">
+        <button class="btn btn-success">Add</button>
+        <button class="btn btn-warning">Edit</button>
+        <button class="btn btn-danger">Delete</button>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <h5>Notifications</h5>
+      <span class="badge badge-info">Messages</span>
+      <span class="badge badge-danger">Alerts</span>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
