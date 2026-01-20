@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Magazine Cover</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <style>
+        .magazine-bg {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
+                        url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80');
+            background-size: cover;
+            min-height: 90vh;
+            color: white;
+            border: 10px solid #fff;
+        }
+        .issue-date { font-weight: bold; letter-spacing: 2px; }
+        .main-title { font-weight: 900; text-transform: uppercase; border-bottom: 5px solid #ffc107; display: inline-block; }
+    </style>
+</head>
+<body>
+
+<div class="container mt-4">
+    <div class="jumbotron magazine-bg d-flex flex-column justify-content-between">
+        <div>
+            <p class="issue-date text-warning">JANUARY 2026 | ISSUE #42</p>
+            <h1 class="display-1 main-title">TECH HORIZON</h1>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="h1">THE FUTURE OF AI</h2>
+                <p class="lead">How generative models are reshaping the creative industry in 2026.</p>
+                <span class="badge badge-danger p-2">EXCLUSIVE INTERVIEW</span>
+            </div>
+            
+            <div class="col-md-4 offset-md-2 text-right d-none d-md-block">
+                <div class="border-left pl-3">
+                    <h4>Quantum Computing</h4>
+                    <p>Is it finally here?</p>
+                    <hr class="bg-white">
+                    <h4>Green Energy</h4>
+                    <p>The tech saving the planet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
