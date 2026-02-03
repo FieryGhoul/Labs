@@ -1,0 +1,6 @@
+python3 -m venv dj-env
+source dj-env/bin/activate
+python3 -m pip install django
+django-admin startproject MyProject
+cd MyProject
+
