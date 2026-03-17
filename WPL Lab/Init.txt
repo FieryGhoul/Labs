@@ -4,3 +4,4 @@ python3 -m pip install django
 django-admin startproject MyProject
 cd MyProject
 
+python3 manage.py runserver
