@@ -5,3 +5,7 @@ django-admin startproject MyProject
 cd MyProject
 
 python3 manage.py runserver
+
+
+python3 manage.py makemigrations [app_name]
+python3 manage.py migrate [app_name]
